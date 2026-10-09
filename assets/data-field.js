@@ -1,4 +1,6 @@
 // Live background for the home page: a perspective "data terrain" of dots driven by layered waves.
+// Built to be light on phones: wave terms are computed once per row/column, off-screen points are
+// skipped entirely, dot buffers are reused between frames, and small screens draw at 30fps.
 (function () {
   var canvas = document.getElementById('data-field');
   if (!canvas || !canvas.getContext) return;
@@ -6,15 +8,18 @@
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   var INK = '10,10,10';
-  var BUCKETS = 10; // dots are batched by opacity so each frame needs only a few fills
-  var w, h, cols, rows, depth, farP, farY, nearY, spreadX, ampY, frame;
+  var TAU = Math.PI * 2;
+  var BUCKETS = 10;      // dots are batched by opacity so each frame needs only a few fills
+  var MAX_ALPHA = 0.54;
+  var fills = [];
+  for (var f = 0; f < BUCKETS; f++) fills.push('rgba(' + INK + ',' + ((f + 0.5) * MAX_ALPHA / BUCKETS).toFixed(3) + ')');
 
-  function surface(x, z, t) {
-    return Math.sin(x * 0.16 + t * 0.55) * 0.55 +
-      Math.sin(z * 0.21 - t * 0.42) * 0.45 +
-      Math.sin((x + z) * 0.09 + t * 0.3) * 0.7 +
-      Math.cos(Math.hypot(x - 10, z - 18) * 0.28 - t * 0.9) * 0.35;
-  }
+  var w, h, cols, rows, ampY, frameMs, frame, lastDraw = 0;
+  var rowY, rowX0, rowStep, rowAmp, rowRadius, rowAlpha, rowStroke, rowLo, rowHi; // per-row geometry
+  var cosD, sinD;                    // per-point basis for the radial ripple
+  var colWave, rowWave, diagWave;    // per-frame wave terms
+  var px, py, pr, pb, order;         // per-frame dot buffers
+  var counts = new Int32Array(BUCKETS);
 
   function resize() {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -24,77 +29,110 @@
     canvas.height = Math.round(h * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    // The grid is wider than the screen so even the far edge spans the full width;
-    // rows map from farY (just below the header) down past the bottom edge.
     var small = w < 640;
+    frameMs = small ? 1000 / 30 : 0; // the waves are slow, so 30fps on phones looks the same and saves battery
     rows = small ? 40 : 54;
-    depth = 24;
-    farP = depth / (rows - 1 + depth);
+    var depth = 24;
+    var farP = depth / (rows - 1 + depth);
     var farSpacing = small ? 9 : 11;
-    cols = Math.ceil((w * 1.15) / farSpacing / 2) * 2;
-    spreadX = farSpacing / farP;
+    cols = Math.ceil((w * 1.15) / farSpacing / 2) * 2; // wider than the screen so the far edge spans it
+    var spreadX = farSpacing / farP;
     var header = document.querySelector('header');
-    farY = (header ? header.getBoundingClientRect().bottom : 0) + h * 0.025;
-    nearY = h * 1.04;
+    var farY = (header ? header.getBoundingClientRect().bottom : 0) + h * 0.025; // field starts just below the header
+    var nearY = h * 1.04;
     ampY = h * (small ? 0.05 : 0.06);
-  }
 
-  // j = 0 is the far edge, rows - 1 the nearest row
-  function perspective(j) {
-    return depth / (rows - 1 - j + depth);
-  }
+    // Row j = 0 is the far edge, rows - 1 the nearest. Everything that depends only on the row is fixed here.
+    rowY = new Float32Array(rows); rowX0 = new Float32Array(rows); rowStep = new Float32Array(rows);
+    rowAmp = new Float32Array(rows); rowRadius = new Float32Array(rows); rowAlpha = new Float32Array(rows);
+    rowLo = new Int32Array(rows); rowHi = new Int32Array(rows); rowStroke = [];
+    for (var j = 0; j < rows; j++) {
+      var p = depth / (rows - 1 - j + depth);
+      var mix = (p - farP) / (1 - farP); // 0 far .. 1 near
+      rowY[j] = nearY - (nearY - farY) * (1 - p) / (1 - farP);
+      rowStep[j] = spreadX * p;
+      rowX0[j] = w / 2 - (cols - 1) / 2 * rowStep[j];
+      rowAmp[j] = ampY * p;
+      rowRadius[j] = 0.55 + 1.5 * p;
+      rowAlpha[j] = 0.08 + 0.46 * Math.pow(mix, 0.9);
+      rowStroke.push('rgba(' + INK + ',' + (0.035 + 0.07 * mix).toFixed(3) + ')');
+      // Only the columns that land on screen are ever computed
+      rowLo[j] = Math.max(0, Math.ceil((-4 - rowX0[j]) / rowStep[j]));
+      rowHi[j] = Math.min(cols - 1, Math.floor((w + 4 - rowX0[j]) / rowStep[j]));
+    }
 
-  function project(i, j, y) {
-    var p = perspective(j);
-    var rowY = nearY - (nearY - farY) * (1 - p) / (1 - farP);
-    return { x: w / 2 + (i - (cols - 1) / 2) * spreadX * p, y: rowY - y * ampY * p, p: p };
+    var n = cols * rows;
+    cosD = new Float32Array(n); sinD = new Float32Array(n);
+    for (j = 0; j < rows; j++) {
+      for (var i = 0; i < cols; i++) {
+        var d = Math.hypot(i - 10, j - 18) * 0.28;
+        cosD[j * cols + i] = Math.cos(d);
+        sinD[j * cols + i] = Math.sin(d);
+      }
+    }
+    colWave = new Float32Array(cols); rowWave = new Float32Array(rows); diagWave = new Float32Array(cols + rows);
+    px = new Float32Array(n); py = new Float32Array(n); pr = new Float32Array(n);
+    pb = new Uint8Array(n); order = new Int32Array(n);
   }
 
   function draw(t) {
     ctx.clearRect(0, 0, w, h);
 
-    var buckets = [];
-    for (var b = 0; b < BUCKETS; b++) buckets.push([]);
-    var j, i, y, pt, alpha;
+    // Surface height = column wave + row wave + diagonal wave + radial ripple.
+    // cos(d - a) is expanded to cos(d)cos(a) + sin(d)sin(a) so the ripple needs no trig per point.
+    var i, j, k, b;
+    for (i = 0; i < cols; i++) colWave[i] = Math.sin(i * 0.16 + t * 0.55) * 0.55;
+    for (j = 0; j < rows; j++) rowWave[j] = Math.sin(j * 0.21 - t * 0.42) * 0.45;
+    for (k = 0; k < cols + rows; k++) diagWave[k] = Math.sin(k * 0.09 + t * 0.3) * 0.7;
+    var rc = Math.cos(t * 0.9) * 0.35, rs = Math.sin(t * 0.9) * 0.35;
 
-    // Faint contour lines every fourth row give the dots a surface-plot structure
+    var n = 0;
+    counts.fill(0);
     ctx.lineWidth = 1;
-    for (j = 0; j < rows; j += 4) {
-      ctx.beginPath();
-      for (i = 0; i < cols; i++) {
-        pt = project(i, j, surface(i, j, t));
-        if (i === 0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
-      }
-      ctx.strokeStyle = 'rgba(' + INK + ',' + (0.035 + 0.07 * (pt.p - farP) / (1 - farP)).toFixed(3) + ')';
-      ctx.stroke();
-    }
-
     for (j = 0; j < rows; j++) {
-      for (i = 0; i < cols; i++) {
-        y = surface(i, j, t);
-        pt = project(i, j, y);
-        if (pt.x < -4 || pt.x > w + 4 || pt.y > h + 6) continue;
-        alpha = (0.08 + 0.46 * Math.pow((pt.p - farP) / (1 - farP), 0.9)) * (0.65 + 0.35 * (y + 2) / 4);
-        buckets[Math.min(BUCKETS - 1, Math.floor(alpha * BUCKETS / 0.54))].push(pt.x, pt.y, 0.55 + 1.5 * pt.p);
+      var lo = rowLo[j], hi = rowHi[j];
+      if (lo > hi) continue;
+      var contour = j % 4 === 0; // faint contour lines every fourth row give a surface-plot structure
+      var from = contour ? Math.max(0, lo - 1) : lo, to = contour ? Math.min(cols - 1, hi + 1) : hi;
+      var y0 = rowY[j], x0 = rowX0[j], step = rowStep[j], amp = rowAmp[j], rw = rowWave[j], alpha0 = rowAlpha[j];
+      if (contour) ctx.beginPath();
+      for (i = from; i <= to; i++) {
+        k = j * cols + i;
+        var y = colWave[i] + rw + diagWave[i + j] + cosD[k] * rc + sinD[k] * rs;
+        var x = x0 + i * step, sy = y0 - y * amp;
+        if (contour) { if (i === from) ctx.moveTo(x, sy); else ctx.lineTo(x, sy); }
+        if (i < lo || i > hi || sy > h + 6) continue;
+        b = Math.min(BUCKETS - 1, (alpha0 * (0.65 + 0.0875 * (y + 2)) * BUCKETS / MAX_ALPHA) | 0);
+        px[n] = x; py[n] = sy; pr[n] = rowRadius[j]; pb[n] = b; counts[b]++; n++;
       }
+      if (contour) { ctx.strokeStyle = rowStroke[j]; ctx.stroke(); }
     }
 
+    // Group dots by opacity bucket (counting sort), then one path and one fill per bucket
+    var start = 0, starts = [];
+    for (b = 0; b < BUCKETS; b++) { starts.push(start); start += counts[b]; }
+    for (k = 0; k < n; k++) order[starts[pb[k]]++] = k;
+    start = 0;
     for (b = 0; b < BUCKETS; b++) {
-      var list = buckets[b];
-      if (!list.length) continue;
+      var end = start + counts[b];
+      if (end === start) continue;
       ctx.beginPath();
-      for (var k = 0; k < list.length; k += 3) {
-        ctx.moveTo(list[k] + list[k + 2], list[k + 1]);
-        ctx.arc(list[k], list[k + 1], list[k + 2], 0, Math.PI * 2);
+      for (var s = start; s < end; s++) {
+        k = order[s];
+        ctx.moveTo(px[k] + pr[k], py[k]);
+        ctx.arc(px[k], py[k], pr[k], 0, TAU);
       }
-      ctx.fillStyle = 'rgba(' + INK + ',' + ((b + 0.5) * 0.54 / BUCKETS).toFixed(3) + ')';
+      ctx.fillStyle = fills[b];
       ctx.fill();
+      start = end;
     }
   }
 
   function loop(now) {
-    draw(now / 1000 * 0.6);
     frame = requestAnimationFrame(loop);
+    if (now - lastDraw < frameMs - 4) return;
+    lastDraw = now;
+    draw(now / 1000 * 0.6);
   }
 
   function start() {

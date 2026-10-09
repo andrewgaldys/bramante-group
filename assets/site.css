@@ -1,10 +1,13 @@
 /* Bramante Group — shared styles (Tailwind utilities load from the CDN on each page) */
 
-html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; -webkit-tap-highlight-color: transparent; }
 
-/* Signature rail down the left edge */
-body { padding-left: 12px; }
-body::before { content: ""; position: fixed; top: 0; bottom: 0; left: 0; z-index: 70; width: 12px; background: #0a0a0a; }
+/* Signature rail down the left edge (widens into the notch area on phones held sideways) */
+body { padding-left: 12px; padding-left: calc(12px + env(safe-area-inset-left, 0px)); padding-right: env(safe-area-inset-right, 0px); }
+body::before { content: ""; position: fixed; top: 0; bottom: 0; left: 0; z-index: 70; width: 12px; width: calc(12px + env(safe-area-inset-left, 0px)); background: #0a0a0a; }
+
+/* Keeps footers clear of the iPhone home indicator */
+.safe-bottom { padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px)); }
 
 .font-serif { font-variant-numeric: lining-nums; }
 
@@ -20,17 +23,16 @@ body::before { content: ""; position: fixed; top: 0; bottom: 0; left: 0; z-index
 
 .label { font-size: 12px; font-weight: 700; line-height: 1; letter-spacing: 0.06em; text-transform: uppercase; }
 
-.nav-link { transition: color 0.2s; }
-.nav-link:hover, .nav-link[aria-current="page"] { color: #0a0a0a; }
+.nav-link { transition: color 0.2s, opacity 0.2s; }
+.nav-link[aria-current="page"] { color: #0a0a0a; }
+.nav-link:active { opacity: 0.55; }
 .nav-link[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 8px; }
 
 .btn { display: inline-flex; align-items: center; gap: 1.5rem; padding: 17px 22px; border: 1px solid transparent; font-size: 14px; font-weight: 600; line-height: 1.25rem; white-space: nowrap; transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
 .btn svg { width: 16px; height: 16px; flex-shrink: 0; transition: transform 0.2s; }
-.btn:hover svg { transform: translateX(4px); }
 .btn-dark { background: #0a0a0a; color: #fff; }
-.btn-dark:hover { background: #404040; }
 .btn-line { border-color: #d4d4d4; color: #0a0a0a; }
-.btn-line:hover { border-color: #0a0a0a; }
+.btn:active { opacity: 0.7; }
 
 /* Soft white haze behind text that sits on the animated field */
 .haze { position: relative; }
@@ -38,17 +40,17 @@ body::before { content: ""; position: fixed; top: 0; bottom: 0; left: 0; z-index
 .haze-sm::before { inset: -14px -90px -18px; } /* stays inside the footer padding so it never adds scroll */
 
 /* Home: the single centered link */
-.view-link { display: inline-block; font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(44px, 3.6vw + 26px, 76px); font-weight: 500; line-height: 1.1; color: #0a0a0a; text-decoration-thickness: 1px; text-underline-offset: 12px; }
-.view-link:hover { font-style: italic; text-decoration-line: underline; }
+.view-link { display: inline-block; font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(40px, 3.6vw + 26px, 76px); font-weight: 500; line-height: 1.1; color: #0a0a0a; text-decoration-thickness: 1px; text-underline-offset: 12px; }
+.view-link:active { opacity: 0.55; }
 .view-link:focus-visible { outline: 1px solid #0a0a0a; outline-offset: 10px; }
 
-/* Frosted header/footer bars on small screens; clear on wide screens */
-.glass-bar { background: rgba(255, 255, 255, 0.45); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border-color: rgba(255, 255, 255, 0.6); }
-@media (min-width: 1024px) {
-  .glass-bar { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-color: transparent; }
-}
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glass-bar { background: rgba(255, 255, 255, 0.85); }
+/* Hover effects only on devices with a real pointer, so taps on phones don't leave them stuck on */
+@media (hover: hover) {
+  .nav-link:hover { color: #0a0a0a; }
+  .btn:hover svg { transform: translateX(4px); }
+  .btn-dark:hover { background: #404040; }
+  .btn-line:hover { border-color: #0a0a0a; }
+  .view-link:hover { font-style: italic; text-decoration-line: underline; }
 }
 
 @media (prefers-reduced-motion: reduce) {
