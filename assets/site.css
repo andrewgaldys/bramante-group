@@ -8,8 +8,8 @@ body::before { content: ""; position: fixed; top: 0; bottom: 0; left: 0; z-index
 
 .font-serif { font-variant-numeric: lining-nums; }
 
-/* Logo: BRAMANTE over GROUP, same serif and letter-spacing, GROUP smaller */
-.logo { display: inline-flex; flex-direction: column; }
+/* Logo: BRAMANTE over a centered GROUP, same serif and letter-spacing, GROUP smaller */
+.logo { display: inline-flex; flex-direction: column; align-items: center; }
 .logo span { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; line-height: 0.8; letter-spacing: 0.06em; margin-right: -0.06em; color: #0a0a0a; }
 .logo-main { font-size: 30px; }
 .logo-sub { margin-top: 8px; font-size: 14px; }
@@ -54,8 +54,15 @@ body::before { content: ""; position: fixed; top: 0; bottom: 0; left: 0; z-index
   .glass { background: rgba(255, 255, 255, 0.88); }
   .glass-bar { background: rgba(255, 255, 255, 0.85); }
 }
-.btn-glass { border-color: rgba(10, 10, 10, 0.25); background: rgba(255, 255, 255, 0.35); color: #0a0a0a; }
-.btn-glass:hover { border-color: #0a0a0a; background: rgba(255, 255, 255, 0.6); }
+/* Page links along the bottom edge of the home card */
+.page-link { display: flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 20px 12px; font-size: 14px; font-weight: 600; transition: background-color 0.2s, color 0.2s; }
+.page-link:hover { background: #0a0a0a; color: #fff; }
+.page-link svg { display: none; width: 16px; height: 16px; flex-shrink: 0; transition: transform 0.2s; }
+.page-link:hover svg { transform: translateX(4px); }
+@media (min-width: 640px) {
+  .page-link { justify-content: space-between; padding: 22px 28px; font-size: 15px; }
+  .page-link svg { display: block; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0s !important; }

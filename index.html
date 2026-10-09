@@ -24,18 +24,12 @@
   <canvas id="data-field" class="fixed inset-0 -z-10 h-full w-full" aria-hidden="true"></canvas>
 
   <header class="glass-bar border-b">
-    <div class="flex flex-col gap-5 px-4 py-5 sm:h-24 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-0 lg:px-10">
+    <!-- pr-3 offsets the 12px left rail so the logo sits on the true center of the screen -->
+    <div class="flex h-20 items-center justify-center pr-3 sm:h-24">
       <a href="index.html" class="logo" aria-label="Bramante Group — Home">
         <span class="logo-main">BRAMANTE</span>
         <span class="logo-sub">GROUP</span>
       </a>
-      <nav aria-label="Primary">
-        <ul class="flex gap-7 text-[15px] font-medium text-neutral-700 sm:gap-10">
-          <li><a href="about.html" class="nav-link">About</a></li>
-          <li><a href="research.html" class="nav-link">Research</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
     </div>
   </header>
 
@@ -48,15 +42,15 @@
       <p class="mt-5 max-w-md text-[16px] leading-7 text-neutral-700 sm:text-[17px]">
         Data-driven market intelligence for owners, lenders, and allocators of commercial real estate.
       </p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="research.html" class="btn btn-dark">View Research <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-        <a href="about.html" class="btn btn-glass max-sm:!hidden">About the Firm</a>
-      </div>
-      <p class="label mt-10 hidden text-neutral-600 sm:block lg:hidden xl:block">Macro Mechanics &nbsp;·&nbsp; Micro Market Data &nbsp;·&nbsp; Development Feasibility</p>
+      <nav aria-label="Primary" class="-mx-6 -mb-6 mt-8 grid grid-cols-3 border-t border-black/10 sm:-mx-10 sm:-mb-10 sm:mt-10 xl:-mx-14 xl:-mb-14 xl:mt-12">
+        <a href="about.html" class="page-link">About <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        <a href="research.html" class="page-link border-l border-black/10">Research <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        <a href="contact.html" class="page-link border-l border-black/10">Contact <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      </nav>
     </section>
   </main>
 
-  <footer class="glass-bar border-t px-4 py-4 text-[11px] text-neutral-700 sm:px-6 sm:text-[12px] lg:px-7 lg:py-4">
+  <footer class="glass-bar border-t px-4 py-4 pr-7 text-center text-[11px] text-neutral-700 sm:text-[12px] lg:py-4">
     <p class="glass-chip">&copy; <span id="year">2026</span> Bramante Group, LLC &nbsp;·&nbsp; Research purposes only.</p>
   </footer>
 

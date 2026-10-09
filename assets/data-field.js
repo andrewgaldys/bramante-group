@@ -1,5 +1,4 @@
-// Live background for the home page: a perspective "data terrain" of dots driven by
-// layered waves, with a few tracked points whose readouts follow the surface height.
+// Live background for the home page: a perspective "data terrain" of dots driven by layered waves.
 (function () {
   var canvas = document.getElementById('data-field');
   if (!canvas || !canvas.getContext) return;
@@ -8,7 +7,7 @@
 
   var INK = '10,10,10';
   var BUCKETS = 10; // dots are batched by opacity so each frame needs only a few fills
-  var w, h, cols, rows, depth, farP, farY, nearY, spreadX, ampY, nodes, topSafe, frame, lastLabelUpdate = 0;
+  var w, h, cols, rows, depth, farP, farY, nearY, spreadX, ampY, frame;
 
   function surface(x, z, t) {
     return Math.sin(x * 0.16 + t * 0.55) * 0.55 +
@@ -37,19 +36,6 @@
     farY = h * (w < 1024 ? 0.16 : 0.2);
     nearY = h * 1.04;
     ampY = h * (small ? 0.05 : 0.06);
-
-    // Tracked points, placed by screen position (x fraction, depth fraction 0 = far)
-    nodes = [[0.62, 0.12], [0.86, 0.3], [0.56, 0.55], [0.92, 0.06], [0.76, 0.82]].map(function (target) {
-      var j = Math.round(target[1] * (rows - 1));
-      var p = perspective(j);
-      var i = Math.round((target[0] * w - w / 2) / (spreadX * p) + (cols - 1) / 2);
-      return { i: i, j: j, label: '' };
-    });
-    lastLabelUpdate = 0;
-
-    // Keep readouts out from under the header
-    var header = document.querySelector('header');
-    topSafe = header ? header.getBoundingClientRect().bottom + 6 : 0;
   }
 
   // j = 0 is the far edge, rows - 1 the nearest row
@@ -63,7 +49,7 @@
     return { x: w / 2 + (i - (cols - 1) / 2) * spreadX * p, y: rowY - y * ampY * p, p: p };
   }
 
-  function draw(t, now) {
+  function draw(t) {
     ctx.clearRect(0, 0, w, h);
 
     var buckets = [];
@@ -103,40 +89,17 @@
       ctx.fillStyle = 'rgba(' + INK + ',' + ((b + 0.5) * 0.54 / BUCKETS).toFixed(3) + ')';
       ctx.fill();
     }
-
-    // Tracked points: ring, leader line, and a readout of the local surface value
-    var refreshLabels = now - lastLabelUpdate > 400;
-    if (refreshLabels) lastLabelUpdate = now;
-    ctx.font = '500 10px Inter, ui-sans-serif, system-ui, sans-serif';
-    ctx.textAlign = 'center';
-    nodes.forEach(function (n) {
-      y = surface(n.i, n.j, t);
-      pt = project(n.i, n.j, y);
-      if (refreshLabels || !n.label) n.label = (50 + y * 12.5).toFixed(2);
-      if (pt.y - 50 < topSafe) return;
-      ctx.strokeStyle = 'rgba(' + INK + ',0.55)';
-      ctx.beginPath();
-      ctx.arc(pt.x, pt.y, 3.5, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.strokeStyle = 'rgba(' + INK + ',0.18)';
-      ctx.beginPath();
-      ctx.moveTo(pt.x, pt.y - 6);
-      ctx.lineTo(pt.x, pt.y - 34);
-      ctx.stroke();
-      ctx.fillStyle = 'rgba(' + INK + ',0.55)';
-      ctx.fillText(n.label, pt.x, pt.y - 40);
-    });
   }
 
   function loop(now) {
-    draw(now / 1000 * 0.6, now);
+    draw(now / 1000 * 0.6);
     frame = requestAnimationFrame(loop);
   }
 
   function start() {
     cancelAnimationFrame(frame);
     resize();
-    if (reducedMotion.matches) draw(8, 0); // a single still frame
+    if (reducedMotion.matches) draw(8); // a single still frame
     else frame = requestAnimationFrame(loop);
   }
 
