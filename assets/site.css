@@ -32,11 +32,30 @@ body::before { content: ""; position: fixed; top: 0; bottom: 0; left: 0; z-index
 .btn-line { border-color: #d4d4d4; color: #0a0a0a; }
 .btn-line:hover { border-color: #0a0a0a; }
 
-/* Home background: grey matched to the photo's sky, photo fades in from the left on wide screens */
-.home-sky { background: linear-gradient(to bottom, #e9e9e9, #f1f1f1 55%, #f5f5f5); }
-@media (min-width: 1024px) {
-  .home-photo { -webkit-mask-image: linear-gradient(to right, transparent, #000 22%); mask-image: linear-gradient(to right, transparent, #000 22%); }
+/* Frosted glass over the home page photo; header/footer bars go clear on wide screens */
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
+.glass-bar {
+  background: rgba(255, 255, 255, 0.45);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+@media (min-width: 1024px) {
+  .glass-bar { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-color: transparent; }
+  .glass-chip { display: inline-block; padding: 6px 12px; background: rgba(255, 255, 255, 0.55); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: rgba(255, 255, 255, 0.88); }
+  .glass-bar { background: rgba(255, 255, 255, 0.85); }
+}
+.btn-glass { border-color: rgba(10, 10, 10, 0.25); background: rgba(255, 255, 255, 0.35); color: #0a0a0a; }
+.btn-glass:hover { border-color: #0a0a0a; background: rgba(255, 255, 255, 0.6); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0s !important; }

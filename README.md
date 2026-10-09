@@ -14,6 +14,6 @@ Website for **Bramante Group, LLC**: commercial real estate data and research.
 
 ## Updating content
 
-- **Home background:** `assets/flatiron.jpg` (swap the file to change it; the grey in `.home-sky` in `assets/site.css` is matched to the photo's sky).
+- **Home background:** `assets/flatiron.jpg` fills the page; swap the file to change it. Glass styles (`.glass`, `.glass-bar`) live in `assets/site.css`.
 - **Reports:** add PDFs to a `reports/` folder and point each report's button at its file.
 - **Contact:** add your inbox after `mailto:` in the links on `contact.html`.
