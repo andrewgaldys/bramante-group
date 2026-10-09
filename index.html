@@ -10,12 +10,12 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-size='40' fill='%23fff'%3EB%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { theme: { extend: { fontFamily: { serif: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] }, colors: { ink: '#0a0a0a' } } } };
   </script>
-  <link rel="stylesheet" href="assets/site.css" />
+  <link rel="stylesheet" href="assets/site.css?v=4" />
 </head>
 
 <body class="relative isolate flex min-h-svh flex-col bg-white font-sans text-ink">
@@ -34,18 +34,19 @@
   </header>
 
   <main class="flex flex-1 items-end px-4 py-4 sm:px-6 sm:py-6 lg:items-center lg:px-10">
-    <section class="glass w-full max-w-[600px] p-6 sm:p-10 lg:max-w-[560px] xl:max-w-[620px] xl:p-14">
-      <p class="label text-neutral-600">Data &amp; Research</p>
-      <h1 class="mt-6 font-serif text-[2.3rem] font-medium leading-[1.05] sm:mt-8 sm:text-[3.25rem] lg:text-[clamp(2.75rem,6.2vh,4.25rem)]">
-        Institutional Commercial Real Estate Data &amp; Research
+    <section class="glass-card w-full max-w-[600px] p-7 text-white sm:p-11 lg:max-w-[560px] xl:max-w-[620px] xl:p-14">
+      <p class="label text-white/60">Data &amp; Research</p>
+      <span class="mt-6 block h-px w-10 bg-white/30" aria-hidden="true"></span>
+      <h1 class="mt-6 font-serif text-[2.3rem] font-medium leading-[1.05] sm:text-[3.25rem] lg:text-[clamp(2.75rem,6.2vh,4.25rem)]">
+        Institutional Commercial Real Estate <span class="italic text-white/80">Data &amp; Research</span>
       </h1>
-      <p class="mt-5 max-w-md text-[16px] leading-7 text-neutral-700 sm:text-[17px]">
+      <p class="mt-5 max-w-md text-[16px] leading-7 text-white/70 sm:text-[17px]">
         Data-driven market intelligence for owners, lenders, and allocators of commercial real estate.
       </p>
-      <nav aria-label="Primary" class="-mx-6 -mb-6 mt-8 grid grid-cols-3 border-t border-black/10 sm:-mx-10 sm:-mb-10 sm:mt-10 xl:-mx-14 xl:-mb-14 xl:mt-12">
-        <a href="about.html" class="page-link">About <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-        <a href="research.html" class="page-link border-l border-black/10">Research <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-        <a href="contact.html" class="page-link border-l border-black/10">Contact <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+      <nav aria-label="Primary" class="mt-9 flex gap-x-7 border-t border-white/15 pt-6 sm:mt-10 sm:gap-x-10">
+        <a href="about.html" class="card-link">About <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        <a href="research.html" class="card-link">Research <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        <a href="contact.html" class="card-link">Contact <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
       </nav>
     </section>
   </main>
@@ -55,6 +56,6 @@
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script src="assets/data-field.js"></script>
+  <script src="assets/data-field.js?v=4"></script>
 </body>
 </html>

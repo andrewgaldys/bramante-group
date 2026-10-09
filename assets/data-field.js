@@ -25,7 +25,7 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     // The grid is wider than the screen so even the far edge spans the full width;
-    // rows map from farY (top of the field) down past the bottom edge.
+    // rows map from farY (just below the header) down past the bottom edge.
     var small = w < 640;
     rows = small ? 40 : 54;
     depth = 24;
@@ -33,7 +33,8 @@
     var farSpacing = small ? 9 : 11;
     cols = Math.ceil((w * 1.15) / farSpacing / 2) * 2;
     spreadX = farSpacing / farP;
-    farY = h * (w < 1024 ? 0.16 : 0.2);
+    var header = document.querySelector('header');
+    farY = (header ? header.getBoundingClientRect().bottom : 0) + h * 0.025;
     nearY = h * 1.04;
     ampY = h * (small ? 0.05 : 0.06);
   }
