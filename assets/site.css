@@ -32,24 +32,26 @@ body::before { content: ""; position: fixed; top: 0; bottom: 0; left: 0; z-index
 .btn-line { border-color: #d4d4d4; color: #0a0a0a; }
 .btn-line:hover { border-color: #0a0a0a; }
 
-/* Home links pinned to the animated surface (positioned by assets/data-field.js).
-   Fallback without JS: a centered row. With JS they stay hidden until placed. */
-.field-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 2.5rem; }
-.js .field-nav { visibility: hidden; }
-.nodes-ready .field-nav { visibility: visible; position: fixed; inset: 0; z-index: 5; display: block; pointer-events: none; }
-.field-link { font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(28px, 1.2vw + 20px, 40px); font-weight: 500; line-height: 1; color: #0a0a0a; padding: 4px 8px; white-space: nowrap; text-shadow: 0 0 18px #fff, 0 0 6px #fff, 0 0 2px #fff; }
-.field-link:hover, .field-link:focus-visible { font-style: italic; }
-.field-link:focus-visible { outline: 1px solid #0a0a0a; outline-offset: 4px; }
-.nodes-ready .field-link { position: absolute; top: 0; left: 0; pointer-events: auto; transform-origin: 50% 100%; will-change: transform; }
+/* Home: still call to action at the center, with a soft white haze behind it */
+.center-stage { position: relative; }
+.center-stage::before { content: ""; position: absolute; inset: -90px -160px; z-index: -1; background: radial-gradient(closest-side, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.6) 55%, transparent); pointer-events: none; }
+.view-link { display: inline-flex; align-items: center; gap: 1.1rem; padding-bottom: 10px; border-bottom: 1px solid rgba(10, 10, 10, 0.35); font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(40px, 3.2vw + 24px, 68px); font-weight: 500; line-height: 1; color: #0a0a0a; transition: border-color 0.3s; }
+.view-link svg { width: 0.6em; height: 0.4em; flex-shrink: 0; transition: transform 0.3s; }
+.view-link:hover { font-style: italic; border-color: #0a0a0a; }
+.view-link:hover svg { transform: translateX(6px); }
+.view-link:focus-visible { outline: 1px solid #0a0a0a; outline-offset: 8px; }
+
+/* Home footer: frosted strip on every screen size */
+.glass-foot { background: rgba(255, 255, 255, 0.6); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border-color: rgba(10, 10, 10, 0.06); }
 
 /* Frosted header/footer bars on small screens; clear on wide screens */
 .glass-bar { background: rgba(255, 255, 255, 0.45); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border-color: rgba(255, 255, 255, 0.6); }
 @media (min-width: 1024px) {
   .glass-bar { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-color: transparent; }
-  .glass-chip { display: inline-block; padding: 6px 12px; background: rgba(255, 255, 255, 0.55); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .glass-bar { background: rgba(255, 255, 255, 0.85); }
+  .glass-foot { background: rgba(255, 255, 255, 0.9); }
 }
 
 @media (prefers-reduced-motion: reduce) {
