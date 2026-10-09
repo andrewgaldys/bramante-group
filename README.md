@@ -14,6 +14,6 @@ Website for **Bramante Group, LLC**: commercial real estate data and research.
 
 ## Updating content
 
-- **Home background:** live animated data surface drawn on a canvas by `assets/data-field.js` (respects reduced-motion). Glass styles (`.glass`, `.glass-bar`) live in `assets/site.css`.
+- **Home page:** animated data surface drawn by `assets/data-field.js`; the About / Research / Contact links are pinned to points on it (move them via each link's `data-node="x,y"` screen fractions, `data-node-sm` for phones).
 - **Reports:** add PDFs to a `reports/` folder and point each report's button at its file.
 - **Contact:** add your inbox after `mailto:` in the links on `contact.html`.
