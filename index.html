@@ -3,451 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bramante Group — Institutional Commercial Real Estate &amp; Advisory</title>
-  <meta name="description" content="Bramante Group is a commercial real estate firm spanning data and research, asset management, investment, and advisory services." />
-  <meta name="theme-color" content="#ffffff" />
-  <meta property="og:type" content="website" />
+  <title>Bramante Group — Commercial Real Estate Data &amp; Research</title>
+  <meta name="description" content="Bramante Group delivers institutional commercial real estate data and research for owners, lenders, and allocators." />
   <meta property="og:title" content="Bramante Group" />
-  <meta property="og:description" content="Institutional Commercial Real Estate &amp; Advisory." />
+  <meta property="og:description" content="Institutional commercial real estate data &amp; research." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-size='40' fill='%23fff'%3EB%3C/text%3E%3C/svg%3E" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-          },
-          colors: { ink: '#0a0a0a' },
-        },
-      },
-    };
+    tailwind.config = { theme: { extend: { fontFamily: { serif: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] }, colors: { ink: '#0a0a0a' } } } };
   </script>
-
-  <style type="text/tailwindcss">
-    @layer base {
-      html { @apply scroll-smooth antialiased; }
-      /* Signature rail: a fixed black stripe down the left edge of every page */
-      body { padding-left: 12px; }
-      body::before { content: ""; @apply fixed inset-y-0 left-0 z-[70] w-3 bg-ink; }
-      .font-serif { font-variant-numeric: lining-nums; }
-      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-    }
-    @layer components {
-      .wrap { @apply mx-auto w-full max-w-[1416px] px-5 sm:px-10 lg:px-14; }
-      .label { @apply text-[12px] font-bold uppercase leading-none tracking-[0.06em]; }
-      .rule { @apply block h-[2px] w-10 bg-ink; }
-      .btn { @apply relative inline-flex items-center gap-6 py-[18px] pl-[22px] pr-[22px] text-[14px] font-semibold leading-5 transition-colors duration-200; }
-      .btn svg { @apply h-4 w-4 shrink-0 transition-transform duration-200; }
-      .btn:hover svg { @apply translate-x-1; }
-      .btn-dark { @apply bg-ink text-white hover:bg-neutral-700; }
-      .btn-light { @apply bg-white text-ink hover:bg-neutral-200; }
-      .nav-link { @apply transition-colors duration-200 hover:text-neutral-500; }
-      .logo-word { letter-spacing: 0.06em; margin-right: -0.06em; }
-
-      /* Image placeholders — swap each for an <img> or <video> (object-cover) */
-      .ph { @apply relative overflow-hidden bg-neutral-300; }
-      .ph-tag { @apply absolute bottom-3 left-4 text-[10px] font-semibold uppercase tracking-[0.18em]; }
-      .ph-fins { background: linear-gradient(100deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.25) 100%), radial-gradient(ellipse at 78% 30%, rgba(255,255,255,.22), transparent 60%), repeating-linear-gradient(100deg, #161616 0 30px, #4a4a4a 30px 33px, #0f0f0f 33px 70px); }
-      .ph-facade { background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.18)), repeating-linear-gradient(90deg, #dcdcdc 0 46px, #bdbdbd 46px 47px, #e8e8e8 47px 96px), #e5e5e5; }
-      .ph-plan { background-color: #f5f5f5; background-image: linear-gradient(#cfcfcf 1px, transparent 1px), linear-gradient(90deg, #cfcfcf 1px, transparent 1px), linear-gradient(#e7e7e7 1px, transparent 1px), linear-gradient(90deg, #e7e7e7 1px, transparent 1px); background-size: 128px 128px, 128px 128px, 32px 32px, 32px 32px; }
-      .ph-tower { background: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.18), transparent 55%), repeating-linear-gradient(0deg, #1c1c1c 0 14px, #3d3d3d 14px 16px), #1c1c1c; }
-      .ph-hatch { background: repeating-linear-gradient(135deg, #e5e5e5 0 2px, #f5f5f5 2px 16px); }
-    }
-    .header-hidden { transform: translateY(-100%); }
-  </style>
+  <link rel="stylesheet" href="assets/site.css" />
 </head>
 
-<body class="bg-white font-sans text-ink selection:bg-ink selection:text-white">
+<body class="flex min-h-svh flex-col bg-white font-sans text-ink">
 
-  <!-- ============================== HEADER ============================== -->
-  <header id="site-header" class="sticky top-0 z-50 border-b border-neutral-200 bg-white transition-transform duration-300">
-    <div class="flex h-[72px] items-center justify-between pl-5 pr-5 sm:pl-8 sm:pr-10 lg:h-24 lg:pr-14">
-      <a href="#top" class="inline-flex flex-col" aria-label="Bramante Group — Home">
-        <span class="logo-word font-serif text-[30px] font-semibold leading-[0.8] sm:text-[36px]">BRAMANTE</span>
-        <span class="logo-word mt-2 font-serif text-[14px] font-semibold leading-[0.8] sm:text-[17px]">GROUP</span>
+  <header class="border-b border-neutral-200">
+    <div class="flex flex-col gap-5 px-4 py-5 sm:h-24 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-0 lg:px-10">
+      <a href="index.html" class="logo" aria-label="Bramante Group — Home">
+        <span class="logo-main">BRAMANTE</span>
+        <span class="logo-sub">GROUP</span>
       </a>
-
-      <div class="hidden flex-col items-end gap-4 lg:flex">
-        <ul class="label flex items-center gap-8">
-          <li><a href="https://andrewgaldys.github.io/bramante-research/" class="nav-link">Data Room &nbsp;›</a></li>
-          <li><a href="#contact" class="nav-link">Contact Us &nbsp;›</a></li>
+      <nav aria-label="Primary">
+        <ul class="flex gap-7 text-[15px] font-medium text-neutral-500 sm:gap-10">
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="research.html" class="nav-link">Research</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
-        <nav aria-label="Primary">
-          <ul class="flex items-center text-[14px] font-medium xl:text-[15px] [&_a]:px-[10px] xl:[&_a]:px-[14px] [&>li:last-child_a]:pr-0">
-            <li><a href="#research" class="nav-link">Data &amp; Research</a></li>
-            <li><a href="#asset-management" class="nav-link">Asset Management</a></li>
-            <li><a href="#investments" class="nav-link">Investments</a></li>
-            <li><a href="#advisory" class="nav-link">Advisory Services</a></li>
-            <li class="mx-[10px] h-5 w-px bg-neutral-300 xl:mx-[14px]" aria-hidden="true"></li>
-            <li><a href="#about" class="nav-link text-neutral-600">The Firm</a></li>
-            <li><a href="#contact" class="nav-link text-neutral-600">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
-
-      <button id="menu-btn" type="button" class="flex flex-col items-center gap-[5px] lg:hidden" aria-expanded="false" aria-controls="mobile-menu">
-        <span class="block h-[3px] w-10 bg-ink"></span>
-        <span class="label text-[11px]">Menu</span>
-        <span class="block h-[3px] w-10 bg-ink"></span>
-      </button>
+      </nav>
     </div>
-
-    <nav id="mobile-menu" class="hidden max-h-[calc(100svh-72px)] overflow-y-auto border-t border-neutral-200 bg-white lg:hidden" aria-label="Mobile">
-      <ul class="px-5 py-4 text-[20px] font-medium sm:px-8">
-        <li class="border-b border-neutral-200"><a href="#research" class="flex justify-between py-4">Data &amp; Research <span aria-hidden="true">→</span></a></li>
-        <li class="border-b border-neutral-200"><a href="#asset-management" class="flex justify-between py-4">Asset Management <span aria-hidden="true">→</span></a></li>
-        <li class="border-b border-neutral-200"><a href="#investments" class="flex justify-between py-4">Investments <span aria-hidden="true">→</span></a></li>
-        <li class="border-b border-neutral-200"><a href="#advisory" class="flex justify-between py-4">Advisory Services <span aria-hidden="true">→</span></a></li>
-        <li class="border-b border-neutral-200"><a href="#about" class="flex justify-between py-4 text-neutral-600">The Firm <span aria-hidden="true">→</span></a></li>
-        <li class="border-b border-neutral-200"><a href="#contact" class="flex justify-between py-4 text-neutral-600">Contact <span aria-hidden="true">→</span></a></li>
-      </ul>
-      <ul class="label flex gap-8 px-5 pb-8 pt-2 sm:px-8">
-        <li><a href="https://andrewgaldys.github.io/bramante-research/">Data Room &nbsp;›</a></li>
-        <li><a href="#contact">Contact Us &nbsp;›</a></li>
-      </ul>
-    </nav>
   </header>
 
-  <main>
-
-    <!-- ============================== HERO ============================== -->
-    <section id="top" class="relative lg:h-[calc(100svh-96px)] lg:min-h-[620px]">
-      <!--
-        HERO MEDIA — replace the placeholder div below with a full-bleed drone video or image:
-          <video class="absolute inset-0 h-full w-full object-cover" src="media/aerial.mp4"
-                 poster="media/aerial.jpg" autoplay muted loop playsinline></video>
-        Keep a dark gradient over it (see .ph-fins) so the headline stays legible.
-      -->
-      <div class="ph ph-fins aspect-video w-full lg:absolute lg:inset-0 lg:aspect-auto" role="img" aria-label="Aerial footage placeholder">
-        <span class="ph-tag text-white/50 lg:bottom-6 lg:left-auto lg:right-8">Aerial footage placeholder</span>
-      </div>
-
-      <div class="wrap relative py-12 lg:flex lg:h-full lg:items-center lg:py-0">
-        <div class="max-w-[820px] lg:pl-10">
-          <h1 class="font-serif text-[2.6rem] font-medium leading-[1.08] text-ink sm:text-[3.25rem] lg:text-[4rem] lg:leading-[1.1] lg:text-white">
-            Institutional Commercial Real Estate &amp; Advisory
+  <main class="flex flex-1 px-4 pt-4 sm:px-6 sm:pt-6 lg:px-10 lg:pt-10">
+    <section class="grid flex-1 border border-neutral-200 lg:grid-cols-[3fr_2fr] xl:grid-cols-2">
+      <div class="flex flex-col justify-between gap-6 p-6 sm:gap-8 sm:p-10 xl:p-14">
+        <p class="label text-neutral-500">Data &amp; Research</p>
+        <div>
+          <h1 class="font-serif text-[2.3rem] font-medium leading-[1.05] sm:text-[3.25rem] lg:text-[clamp(2.75rem,6.2vh,4.25rem)]">
+            Institutional Commercial Real Estate Data &amp; Research
           </h1>
-          <p class="mt-5 max-w-xl text-[17px] leading-7 text-neutral-600 lg:text-[19px] lg:leading-8 lg:text-white/80">
-            Data-driven market intelligence, underwriting, and strategic asset positioning.
+          <p class="mt-5 max-w-md text-[16px] leading-7 text-neutral-600 sm:text-[17px]">
+            Data-driven market intelligence for owners, lenders, and allocators of commercial real estate.
           </p>
-          <a href="#about" class="btn btn-dark mt-9 lg:bg-white lg:text-ink lg:hover:bg-neutral-200">
-            <svg class="!h-5 !w-5" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M8 6.5 13.5 10 8 13.5v-7Z" class="fill-ink lg:fill-white"/></svg>
-            Explore Our Platform
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== ABOUT ============================== -->
-    <section id="about" class="scroll-mt-24 py-16 sm:py-20 lg:py-28">
-      <div class="wrap">
-        <h2 class="label">About Bramante Group</h2>
-        <span class="mt-6 block h-px w-10 bg-neutral-300 lg:hidden" aria-hidden="true"></span>
-        <p class="mt-6 max-w-[1080px] font-serif text-[1.85rem] font-medium leading-[1.25] sm:text-[2.1rem] lg:mt-8 lg:text-[2.4rem]">
-          Bramante Group is a commercial real estate firm spanning data and research, asset management, investment, and advisory services, built on a single conviction: every sound real estate decision begins with rigorous, proprietary data.
-        </p>
-
-        <div class="mt-14 grid gap-14 lg:mt-20 lg:grid-cols-12 lg:gap-8">
-          <div class="lg:col-span-5">
-            <span class="block h-px w-10 bg-neutral-300" aria-hidden="true"></span>
-            <p class="mt-8 font-serif text-[2rem] font-medium leading-[1.2] sm:text-[2.4rem] lg:text-[2.75rem]">
-              We pair market research with transaction-grade underwriting and aerial site reconnaissance to see each opportunity more completely than the market around it.
-            </p>
-          </div>
-
-          <!-- Platform figures: replace with firm metrics (AUM, square feet analyzed, markets covered) as they become available -->
-          <div class="lg:col-span-6 lg:col-start-7">
-            <dl class="border-t border-neutral-300 text-center">
-              <div class="flex flex-col-reverse items-center border-b border-neutral-300 py-8 lg:py-10">
-                <dt class="mt-3 text-[13px] font-medium">Operating Divisions <sup>1</sup></dt>
-                <dd class="font-serif text-[5rem] font-medium leading-none lg:text-[6.5rem]">4</dd>
-              </div>
-              <div class="flex flex-col-reverse items-center border-b border-neutral-300 py-8 lg:py-10">
-                <dt class="mt-3 text-[13px] font-medium">Market View, Macro to Parcel <sup>2</sup></dt>
-                <dd class="font-serif text-[5rem] font-medium leading-none lg:text-[6.5rem]">360°</dd>
-              </div>
-              <div class="grid border-b border-neutral-300 sm:grid-cols-2">
-                <div class="flex flex-row-reverse items-center justify-between border-b border-neutral-300 py-6 sm:flex-col-reverse sm:justify-center sm:border-b-0 sm:py-10">
-                  <dt class="text-[13px] font-medium sm:mt-3">Research Verticals</dt>
-                  <dd class="font-serif text-[3.5rem] font-medium leading-none sm:text-[5rem] lg:text-[5.5rem]">3</dd>
-                </div>
-                <div class="flex flex-row-reverse items-center justify-between py-6 sm:flex-col-reverse sm:justify-center sm:border-l sm:border-neutral-300 sm:py-10">
-                  <dt class="text-[13px] font-medium sm:mt-3">Integrated Platform</dt>
-                  <dd class="font-serif text-[3.5rem] font-medium leading-none sm:text-[5rem] lg:text-[5.5rem]">1</dd>
-                </div>
-              </div>
-            </dl>
-            <ol class="mt-3 space-y-1 text-[11px] leading-4 text-neutral-500">
-              <li><sup>1</sup> Data &amp; Research, Asset Management, Investments, and Advisory Services</li>
-              <li><sup>2</sup> From capital-market mechanics to parcel-level zoning and aerial site data</li>
-            </ol>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="research.html" class="btn btn-dark">View Research <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+            <a href="about.html" class="btn btn-line max-sm:!hidden">About the Firm</a>
           </div>
         </div>
+        <p class="label hidden text-neutral-400 sm:block lg:hidden xl:block">Macro Mechanics &nbsp;·&nbsp; Micro Market Data &nbsp;·&nbsp; Development Feasibility</p>
+      </div>
+      <!-- Aerial image/video slot: replace this div's contents with <img> or <video class="absolute inset-0 h-full w-full object-cover"> -->
+      <div class="ph-aerial hidden lg:block" role="img" aria-label="Aerial footage placeholder">
+        <span class="ph-tag">Aerial footage placeholder</span>
       </div>
     </section>
-
-    <!-- ============================== ADVANTAGE ============================== -->
-    <section class="pb-16 sm:pb-20 lg:pb-28">
-      <div class="wrap">
-        <div class="max-w-[1080px]">
-          <h2 class="font-serif text-[1.9rem] font-semibold leading-tight">The Advantage of One Analytical Foundation</h2>
-          <span class="rule mt-8" aria-hidden="true"></span>
-          <p class="mt-8 font-serif text-[1.6rem] font-semibold leading-[1.3] sm:text-[1.75rem]">
-            At Bramante, research, asset management, investment, and advisory draw on the same data and the same models, so every recommendation is grounded in evidence and every investment in conviction.
-          </p>
-          <p class="mt-6 max-w-[820px] text-[16px] leading-7 text-neutral-700">
-            Insight produced for one division sharpens the work of the others, from sub-market rent comparables that inform an underwriting to operating data from managed assets that refines the next acquisition thesis.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== DIVISIONS BAND ============================== -->
-    <section class="bg-ink text-white">
-      <div class="wrap grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:items-center lg:gap-8 lg:py-24">
-        <h2 class="font-serif text-[2.4rem] font-medium leading-tight sm:text-[3rem]">Explore our divisions</h2>
-        <ul class="border-t border-white/25 text-[16px] font-medium">
-          <li class="border-b border-white/25"><a href="#research" class="group flex items-center justify-between py-4">Data &amp; Research <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></li>
-          <li class="border-b border-white/25"><a href="#asset-management" class="group flex items-center justify-between py-4">Asset Management <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></li>
-          <li class="border-b border-white/25"><a href="#investments" class="group flex items-center justify-between py-4">Investments <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></li>
-          <li class="border-b border-white/25"><a href="#advisory" class="group flex items-center justify-between py-4">Advisory Services <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ============================== LATEST RESEARCH ============================== -->
-    <section class="py-16 sm:py-20 lg:py-24" aria-labelledby="latest-heading">
-      <div class="wrap">
-        <h2 id="latest-heading" class="label">Latest Research</h2>
-
-        <div class="mt-6 border-t border-neutral-300">
-          <!-- Featured -->
-          <a href="https://andrewgaldys.github.io/bramante-research/#research" class="group grid gap-6 border-b border-neutral-300 py-6 lg:grid-cols-2 lg:gap-8">
-            <div class="flex flex-col justify-between gap-6 lg:order-1">
-              <h3 class="font-serif text-[2.1rem] font-medium leading-[1.15] group-hover:underline group-hover:decoration-1 group-hover:underline-offset-4 sm:text-[2.6rem] lg:text-[2.9rem]">Impact of 10-Year Treasury Yields on Local Cap Rates</h3>
-              <p class="text-[13px] font-medium text-neutral-600">October 2026 &nbsp;·&nbsp; Macro Mechanics</p>
-            </div>
-            <div class="ph ph-facade aspect-[16/9] lg:order-2">
-              <span class="ph-tag text-ink/40">Image placeholder</span>
-              <span class="absolute bottom-0 right-0 flex h-9 w-9 items-center justify-center bg-ink text-white" aria-hidden="true"><svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-            </div>
-          </a>
-
-          <div class="grid md:grid-cols-2 md:gap-8">
-            <a href="https://andrewgaldys.github.io/bramante-research/#research" class="group flex flex-col gap-2 border-b border-neutral-300 py-6">
-              <h3 class="text-[17px] font-medium leading-6 group-hover:underline group-hover:underline-offset-4">South Florida Class B Multifamily Rent Comps</h3>
-              <p class="text-[13px] font-medium text-neutral-600">September 2026 &nbsp;·&nbsp; Micro Market Data</p>
-            </a>
-            <a href="https://andrewgaldys.github.io/bramante-research/#research" class="group flex gap-6 border-b border-neutral-300 py-6">
-              <div class="flex flex-1 flex-col justify-between gap-4">
-                <h3 class="text-[17px] font-medium leading-6 group-hover:underline group-hover:underline-offset-4">Zoning &amp; Land Use Audits for Commercial Corridors</h3>
-                <p class="text-[13px] font-medium text-neutral-600">September 2026 &nbsp;·&nbsp; Development Feasibility</p>
-              </div>
-              <div class="ph ph-plan aspect-[16/9] w-32 shrink-0 sm:w-52">
-                <span class="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center bg-ink text-white" aria-hidden="true"><svg class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 8h11M9 4l4 4-4 4"/></svg></span>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <div class="mt-10 flex justify-end">
-          <a href="https://andrewgaldys.github.io/bramante-research/" class="btn btn-dark">View All Research <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== DIVISION SPLITS ============================== -->
-    <section aria-label="Operating divisions">
-
-      <!-- Division I -->
-      <div id="research" class="grid scroll-mt-24 lg:min-h-[560px] lg:grid-cols-3">
-        <div class="ph ph-tower aspect-video lg:order-2 lg:col-span-2 lg:aspect-auto" role="img" aria-label="Image placeholder">
-          <span class="ph-tag text-white/50">Image placeholder</span>
-        </div>
-        <div class="flex flex-col items-center justify-center bg-neutral-100 px-8 py-16 text-center lg:px-12 lg:order-1">
-          <p class="label text-neutral-500">Division I</p>
-          <h2 class="mt-5 font-serif text-[2.4rem] font-medium leading-tight">Data &amp; Research</h2>
-          <span class="mx-auto my-7 block h-px w-10 bg-neutral-400" aria-hidden="true"></span>
-          <p class="max-w-sm text-[17px] leading-7 text-neutral-700">Market intelligence on macro-economic shifts, sub-market rent comparables, and market feasibility, published as executive briefs.</p>
-          <a href="https://andrewgaldys.github.io/bramante-research/" class="btn btn-dark mt-9">Explore the Data Room <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-        </div>
-      </div>
-
-      <!-- Division II -->
-      <div id="asset-management" class="grid scroll-mt-24 lg:min-h-[560px] lg:grid-cols-3">
-        <div class="ph ph-facade aspect-video lg:col-span-2 lg:aspect-auto" role="img" aria-label="Image placeholder">
-          <span class="ph-tag text-ink/40">Image placeholder</span>
-        </div>
-        <div class="flex flex-col items-center justify-center bg-ink px-8 py-16 text-center text-white lg:px-12">
-          <p class="label text-white/60">Division II</p>
-          <h2 class="mt-5 font-serif text-[2.4rem] font-medium leading-tight">Asset Management</h2>
-          <span class="mx-auto my-7 block h-px w-10 bg-white/40" aria-hidden="true"></span>
-          <p class="max-w-sm text-[17px] leading-7 text-white/80">Business plan execution, leasing and operating strategy, and investor reporting that protect and grow net operating income.</p>
-          <a href="#contact" class="btn btn-light mt-9">Discuss Your Portfolio <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-        </div>
-      </div>
-
-      <!-- Division III -->
-      <div id="investments" class="grid scroll-mt-24 lg:min-h-[560px] lg:grid-cols-3">
-        <div class="ph ph-plan aspect-video lg:order-2 lg:col-span-2 lg:aspect-auto" role="img" aria-label="Image placeholder">
-          <span class="ph-tag text-ink/40">Image placeholder</span>
-        </div>
-        <div class="flex flex-col items-center justify-center bg-neutral-100 px-8 py-16 text-center lg:px-12 lg:order-1">
-          <p class="label text-neutral-500">Division III</p>
-          <h2 class="mt-5 font-serif text-[2.4rem] font-medium leading-tight">Investments</h2>
-          <span class="mx-auto my-7 block h-px w-10 bg-neutral-400" aria-hidden="true"></span>
-          <p class="max-w-sm text-[17px] leading-7 text-neutral-700">The firm’s own capital, positioned for future asset acquisition and disciplined capital deployment.</p>
-          <a href="#contact" class="btn btn-dark mt-9">Investor Inquiries <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-        </div>
-      </div>
-
-      <!-- Division IV -->
-      <div id="advisory" class="grid scroll-mt-24 lg:min-h-[560px] lg:grid-cols-3">
-        <div class="ph ph-hatch aspect-video lg:col-span-2 lg:aspect-auto" role="img" aria-label="Image placeholder">
-          <span class="ph-tag text-ink/40">Image placeholder</span>
-        </div>
-        <div class="flex flex-col items-center justify-center bg-ink px-8 py-16 text-center text-white lg:px-12">
-          <p class="label text-white/60">Division IV</p>
-          <h2 class="mt-5 font-serif text-[2.4rem] font-medium leading-tight">Advisory Services</h2>
-          <span class="mx-auto my-7 block h-px w-10 bg-white/40" aria-hidden="true"></span>
-          <p class="max-w-sm text-[17px] leading-7 text-white/80">Development feasibility, underwriting, and custom digital offering memorandums for sponsors and owners.</p>
-          <a href="#contact" class="btn btn-light mt-9">Discuss an Engagement <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================== APPROACH ============================== -->
-    <section id="approach" class="scroll-mt-24 py-16 sm:py-20 lg:py-24" aria-labelledby="approach-heading">
-      <div class="wrap">
-        <h2 id="approach-heading" class="font-serif text-[1.9rem] font-semibold leading-tight">Our Approach</h2>
-        <span class="rule mt-8" aria-hidden="true"></span>
-        <p class="mt-8 max-w-[820px] text-[16px] leading-7 text-neutral-700">
-          We identify market inefficiencies by bringing together three capabilities rarely found under one roof.
-        </p>
-
-        <div class="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
-          <article>
-            <div class="ph ph-hatch aspect-[16/9]" role="img" aria-label="Image placeholder"><span class="ph-tag text-ink/40">Image placeholder</span></div>
-            <h3 class="mt-5 text-[16px] font-bold">Proprietary Data</h3>
-            <p class="mt-2 text-[16px] leading-6 text-neutral-700">Rent rolls, transactions, and comps assembled and normalized in-house.</p>
-          </article>
-          <article>
-            <div class="ph ph-plan aspect-[16/9]" role="img" aria-label="Image placeholder"><span class="ph-tag text-ink/40">Image placeholder</span></div>
-            <h3 class="mt-5 text-[16px] font-bold">Dynamic Financial Modeling</h3>
-            <p class="mt-2 text-[16px] leading-6 text-neutral-700">Live sensitivity to rates, cap rates, rent growth, and lease-up.</p>
-          </article>
-          <article>
-            <div class="ph ph-tower aspect-[16/9]" role="img" aria-label="Image placeholder"><span class="ph-tag text-white/50">Image placeholder</span></div>
-            <h3 class="mt-5 text-[16px] font-bold">Aerial Site Reconnaissance</h3>
-            <p class="mt-2 text-[16px] leading-6 text-neutral-700">Drone surveys that reveal what no spreadsheet captures.</p>
-          </article>
-        </div>
-
-        <div class="mt-14 flex justify-center">
-          <a href="#contact" class="btn btn-dark">Start a Conversation <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-        </div>
-      </div>
-    </section>
-
   </main>
 
-  <!-- ============================== FOOTER ============================== -->
-  <footer id="contact" class="scroll-mt-24 bg-ink text-white">
-    <div class="wrap pb-10 pt-16 lg:pt-20">
-      <div class="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-6">
-        <div>
-          <h3 class="border-b border-white/20 pb-2 text-[16px] font-medium">Contact</h3>
-          <!-- Add your inbox after "mailto:" in both links below -->
-          <ul class="mt-4 space-y-2 text-[15px] text-white/85">
-            <li><a href="mailto:?subject=Bramante%20Group%20%E2%80%94%20Inquiry" class="hover:text-white hover:underline">Contact Us</a></li>
-            <li><a href="mailto:?subject=Bramante%20Group%20%E2%80%94%20Investor%20Inquiry" class="hover:text-white hover:underline">Investor Inquiries</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="border-b border-white/20 pb-2 text-[16px] font-medium">Data &amp; Research</h3>
-          <ul class="mt-4 space-y-2 text-[15px] text-white/85">
-            <li><a href="https://andrewgaldys.github.io/bramante-research/" class="hover:text-white hover:underline">Data Room</a></li>
-            <li><a href="https://andrewgaldys.github.io/bramante-research/#research" class="hover:text-white hover:underline">Research Library</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="border-b border-white/20 pb-2 text-[16px] font-medium">Asset Management</h3>
-          <ul class="mt-4 space-y-2 text-[15px] text-white/85">
-            <li><a href="#asset-management" class="hover:text-white hover:underline">Business Plan Execution</a></li>
-            <li><a href="#asset-management" class="hover:text-white hover:underline">Leasing &amp; Operations</a></li>
-            <li><a href="#asset-management" class="hover:text-white hover:underline">Investor Reporting</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="border-b border-white/20 pb-2 text-[16px] font-medium">Investments</h3>
-          <ul class="mt-4 space-y-2 text-[15px] text-white/85">
-            <li><a href="#investments" class="hover:text-white hover:underline">Asset Acquisition</a></li>
-            <li><a href="#investments" class="hover:text-white hover:underline">Capital Deployment</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="border-b border-white/20 pb-2 text-[16px] font-medium">Advisory Services</h3>
-          <ul class="mt-4 space-y-2 text-[15px] text-white/85">
-            <li><a href="#advisory" class="hover:text-white hover:underline">Development Feasibility</a></li>
-            <li><a href="#advisory" class="hover:text-white hover:underline">Underwriting</a></li>
-            <li><a href="#advisory" class="hover:text-white hover:underline">Offering Memorandums</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="border-b border-white/20 pb-2 text-[16px] font-medium">The Firm</h3>
-          <ul class="mt-4 space-y-2 text-[15px] text-white/85">
-            <li><a href="#about" class="hover:text-white hover:underline">About Bramante Group</a></li>
-            <li><a href="#approach" class="hover:text-white hover:underline">Our Approach</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <a href="#top" class="mt-16 inline-flex flex-col items-center gap-2 text-white/85 hover:text-white">
-        <svg class="h-4 w-6" viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M2 12 12 3l10 9"/></svg>
-        <span class="label text-[11px]">Back to Top</span>
-      </a>
-
-      <div class="mt-10 flex flex-col gap-3 border-t border-white/15 pt-8 text-[12px] leading-5 text-neutral-400 lg:flex-row lg:justify-between lg:gap-12">
-        <p class="label text-[11px] text-neutral-300">&copy; <span id="year">2026</span> Bramante Group, LLC</p>
-        <p class="max-w-2xl lg:text-right">Nothing on this website constitutes an offer to sell or a solicitation of an offer to buy any security.</p>
-      </div>
-    </div>
+  <footer class="flex flex-wrap justify-between gap-x-4 gap-y-1 px-4 py-4 text-[11px] text-neutral-500 sm:px-6 sm:text-[12px] lg:px-10 lg:py-5">
+    <p>&copy; <span id="year">2026</span> Bramante Group, LLC</p>
+    <p>Research purposes only.</p>
   </footer>
 
-  <script>
-    (function () {
-      var header = document.getElementById('site-header');
-      var btn = document.getElementById('menu-btn');
-      var menu = document.getElementById('mobile-menu');
-      var lastY = window.scrollY;
-
-      function setOpen(open) {
-        btn.setAttribute('aria-expanded', String(open));
-        menu.classList.toggle('hidden', !open);
-        header.classList.remove('header-hidden');
-      }
-      btn.addEventListener('click', function () { setOpen(btn.getAttribute('aria-expanded') !== 'true'); });
-      menu.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
-      matchMedia('(min-width: 1024px)').addEventListener('change', function (e) { if (e.matches) setOpen(false); });
-
-      // Header slides away while scrolling down and returns on scroll up
-      window.addEventListener('scroll', function () {
-        var y = window.scrollY;
-        if (btn.getAttribute('aria-expanded') !== 'true') {
-          header.classList.toggle('header-hidden', y > lastY && y > 160);
-        }
-        lastY = y;
-      }, { passive: true });
-
-      document.getElementById('year').textContent = new Date().getFullYear();
-    })();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

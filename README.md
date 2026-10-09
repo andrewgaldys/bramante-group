@@ -1,12 +1,19 @@
 # Bramante Group
 
-Landing page for **Bramante Group, LLC**, a commercial real estate advisory and investment firm.
+Website for **Bramante Group, LLC**: commercial real estate data and research.
 
-- Single `index.html`: Tailwind CSS via CDN, Google Fonts (Cormorant Garamond + Inter)
+| Page | File |
+| --- | --- |
+| Home (single screen) | `index.html` |
+| About | `about.html` |
+| Research | `research.html` |
+| Contact | `contact.html` |
+
+- Tailwind CSS via CDN and Google Fonts (Cormorant Garamond + Inter); shared styles in `assets/site.css`
 - Hosted on GitHub Pages from the `main` branch (no build step)
-- Research division site: [bramante-research](https://github.com/andrewgaldys/bramante-research)
 
 ## Updating content
 
-- **Aerial media:** replace the contents of `#hero-media` (video/image snippets are in the HTML comment there).
-- **Contact:** add your inbox to the `mailto:` link in the Contact section.
+- **Aerial media (home):** replace the placeholder inside the `.ph-aerial` div with an `<img>` or `<video>`.
+- **Reports:** add PDFs to a `reports/` folder and point each report's button at its file.
+- **Contact:** add your inbox after `mailto:` in the links on `contact.html`.
