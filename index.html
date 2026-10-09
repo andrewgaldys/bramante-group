@@ -7,6 +7,7 @@
   <meta name="description" content="Bramante Group delivers institutional commercial real estate data and research for owners, lenders, and allocators." />
   <meta property="og:title" content="Bramante Group" />
   <meta property="og:description" content="Institutional commercial real estate data &amp; research." />
+  <meta property="og:image" content="https://andrewgaldys.github.io/bramante-group/assets/flatiron.jpg" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-family='Georgia,serif' font-size='40' fill='%23fff'%3EB%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,18 +17,24 @@
     tailwind.config = { theme: { extend: { fontFamily: { serif: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] }, colors: { ink: '#0a0a0a' } } } };
   </script>
   <link rel="stylesheet" href="assets/site.css" />
+  <link rel="preload" as="image" href="assets/flatiron.jpg" />
 </head>
 
-<body class="flex min-h-svh flex-col bg-white font-sans text-ink">
+<body class="relative isolate flex min-h-svh flex-col font-sans text-ink">
 
-  <header class="border-b border-neutral-200">
+  <!-- Background: photo sits right, its sky fades into a matching grey on the left -->
+  <div class="home-sky absolute inset-0 top-[109px] -z-10 sm:top-[97px] xl:top-0" aria-hidden="true">
+    <img src="assets/flatiron.jpg" alt="" class="home-photo absolute inset-y-0 right-0 h-full w-full object-cover object-top lg:w-[62%] lg:object-center" />
+  </div>
+
+  <header class="border-b border-neutral-200 bg-white xl:border-transparent xl:bg-transparent">
     <div class="flex flex-col gap-5 px-4 py-5 sm:h-24 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-0 lg:px-10">
       <a href="index.html" class="logo" aria-label="Bramante Group — Home">
         <span class="logo-main">BRAMANTE</span>
         <span class="logo-sub">GROUP</span>
       </a>
       <nav aria-label="Primary">
-        <ul class="flex gap-7 text-[15px] font-medium text-neutral-500 sm:gap-10">
+        <ul class="flex gap-7 text-[15px] font-medium text-neutral-500 sm:gap-10 lg:text-neutral-600">
           <li><a href="about.html" class="nav-link">About</a></li>
           <li><a href="research.html" class="nav-link">Research</a></li>
           <li><a href="contact.html" class="nav-link">Contact</a></li>
@@ -36,34 +43,25 @@
     </div>
   </header>
 
-  <main class="flex flex-1 px-4 pt-4 sm:px-6 sm:pt-6 lg:px-10 lg:pt-10">
-    <section class="grid flex-1 border border-neutral-200 lg:grid-cols-[3fr_2fr] xl:grid-cols-2">
-      <div class="flex flex-col justify-between gap-6 p-6 sm:gap-8 sm:p-10 xl:p-14">
-        <p class="label text-neutral-500">Data &amp; Research</p>
-        <div>
-          <h1 class="font-serif text-[2.3rem] font-medium leading-[1.05] sm:text-[3.25rem] lg:text-[clamp(2.75rem,6.2vh,4.25rem)]">
-            Institutional Commercial Real Estate Data &amp; Research
-          </h1>
-          <p class="mt-5 max-w-md text-[16px] leading-7 text-neutral-600 sm:text-[17px]">
-            Data-driven market intelligence for owners, lenders, and allocators of commercial real estate.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a href="research.html" class="btn btn-dark">View Research <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-            <a href="about.html" class="btn btn-line max-sm:!hidden">About the Firm</a>
-          </div>
-        </div>
-        <p class="label hidden text-neutral-400 sm:block lg:hidden xl:block">Macro Mechanics &nbsp;·&nbsp; Micro Market Data &nbsp;·&nbsp; Development Feasibility</p>
+  <main class="flex flex-1 items-end px-4 pt-6 sm:px-6 lg:items-center lg:px-10 lg:py-6">
+    <section class="w-full max-w-[600px] bg-white p-6 shadow-[0_1px_3px_rgba(0,0,0,0.06)] sm:p-10 lg:max-w-[560px] xl:max-w-[620px] xl:p-14">
+      <p class="label text-neutral-500">Data &amp; Research</p>
+      <h1 class="mt-6 font-serif text-[2.3rem] font-medium leading-[1.05] sm:mt-8 sm:text-[3.25rem] lg:text-[clamp(2.75rem,6.2vh,4.25rem)]">
+        Institutional Commercial Real Estate Data &amp; Research
+      </h1>
+      <p class="mt-5 max-w-md text-[16px] leading-7 text-neutral-600 sm:text-[17px]">
+        Data-driven market intelligence for owners, lenders, and allocators of commercial real estate.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="research.html" class="btn btn-dark">View Research <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+        <a href="about.html" class="btn btn-line max-sm:!hidden">About the Firm</a>
       </div>
-      <!-- Aerial image/video slot: replace this div's contents with <img> or <video class="absolute inset-0 h-full w-full object-cover"> -->
-      <div class="ph-aerial hidden lg:block" role="img" aria-label="Aerial footage placeholder">
-        <span class="ph-tag">Aerial footage placeholder</span>
-      </div>
+      <p class="label mt-10 hidden text-neutral-400 sm:block lg:hidden xl:block">Macro Mechanics &nbsp;·&nbsp; Micro Market Data &nbsp;·&nbsp; Development Feasibility</p>
     </section>
   </main>
 
-  <footer class="flex flex-wrap justify-between gap-x-4 gap-y-1 px-4 py-4 text-[11px] text-neutral-500 sm:px-6 sm:text-[12px] lg:px-10 lg:py-5">
-    <p>&copy; <span id="year">2026</span> Bramante Group, LLC</p>
-    <p>Research purposes only.</p>
+  <footer class="bg-white px-4 py-4 text-[11px] text-neutral-500 sm:px-6 sm:text-[12px] lg:bg-transparent lg:px-10 lg:py-5 lg:text-neutral-600">
+    <p>&copy; <span id="year">2026</span> Bramante Group, LLC &nbsp;·&nbsp; Research purposes only.</p>
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
