@@ -15,7 +15,7 @@
   <script>
     tailwind.config = { theme: { extend: { fontFamily: { serif: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] }, colors: { ink: '#0a0a0a' } } } };
   </script>
-  <link rel="stylesheet" href="assets/site.css?v=6" />
+  <link rel="stylesheet" href="assets/site.css?v=7" />
 </head>
 
 <body class="relative isolate flex min-h-svh flex-col bg-white font-sans text-ink">
@@ -34,23 +34,23 @@
   </header>
 
   <main class="flex flex-1 items-center justify-center overflow-x-clip px-4 py-10 pr-7">
-    <div class="center-stage flex flex-col items-center text-center">
-      <h1 class="label text-[10px] tracking-[0.12em] text-neutral-500 sm:text-[12px] sm:tracking-[0.2em]">Commercial Real Estate Data &amp; Research</h1>
-      <a href="research.html" class="view-link mt-6">View Research <svg viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M1 8h21M15 1.5 22 8l-7 6.5"/></svg></a>
-    </div>
+    <h1 class="sr-only">Bramante Group — Commercial Real Estate Data &amp; Research</h1>
+    <a href="research.html" class="view-link haze">Our Research</a>
   </main>
 
-  <footer class="glass-foot border-t px-4 py-4 pr-7 text-center sm:py-5">
-    <nav aria-label="Footer">
-      <ul class="label flex justify-center gap-10 text-[11px] tracking-[0.18em] sm:text-[12px]">
-        <li><a href="about.html" class="nav-link text-neutral-700">About</a></li>
-        <li><a href="contact.html" class="nav-link text-neutral-700">Contact</a></li>
-      </ul>
-    </nav>
-    <p class="mt-3 text-[11px] text-neutral-500 sm:text-[12px]">&copy; <span id="year">2026</span> Bramante Group, LLC &nbsp;·&nbsp; Research purposes only.</p>
+  <footer class="overflow-x-clip px-4 pb-5 pr-7 pt-4 text-center">
+    <div class="haze haze-sm inline-block">
+      <nav aria-label="Footer">
+        <ul class="label flex justify-center gap-10 text-[11px] tracking-[0.18em] sm:text-[12px]">
+          <li><a href="about.html" class="nav-link text-neutral-800">About</a></li>
+          <li><a href="contact.html" class="nav-link text-neutral-800">Contact</a></li>
+        </ul>
+      </nav>
+      <p class="mt-3 text-[11px] text-neutral-600 sm:text-[12px]">&copy; <span id="year">2026</span> Bramante Group, LLC &nbsp;·&nbsp; Research purposes only.</p>
+    </div>
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script src="assets/data-field.js?v=6"></script>
+  <script src="assets/data-field.js?v=7"></script>
 </body>
 </html>

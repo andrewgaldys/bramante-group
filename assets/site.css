@@ -32,17 +32,15 @@ body::before { content: ""; position: fixed; top: 0; bottom: 0; left: 0; z-index
 .btn-line { border-color: #d4d4d4; color: #0a0a0a; }
 .btn-line:hover { border-color: #0a0a0a; }
 
-/* Home: still call to action at the center, with a soft white haze behind it */
-.center-stage { position: relative; }
-.center-stage::before { content: ""; position: absolute; inset: -90px -160px; z-index: -1; background: radial-gradient(closest-side, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.6) 55%, transparent); pointer-events: none; }
-.view-link { display: inline-flex; align-items: center; gap: 1.1rem; padding-bottom: 10px; border-bottom: 1px solid rgba(10, 10, 10, 0.35); font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(40px, 3.2vw + 24px, 68px); font-weight: 500; line-height: 1; color: #0a0a0a; transition: border-color 0.3s; }
-.view-link svg { width: 0.6em; height: 0.4em; flex-shrink: 0; transition: transform 0.3s; }
-.view-link:hover { font-style: italic; border-color: #0a0a0a; }
-.view-link:hover svg { transform: translateX(6px); }
-.view-link:focus-visible { outline: 1px solid #0a0a0a; outline-offset: 8px; }
+/* Soft white haze behind text that sits on the animated field */
+.haze { position: relative; }
+.haze::before { content: ""; position: absolute; inset: -90px -160px; z-index: -1; background: radial-gradient(closest-side, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.6) 55%, transparent); pointer-events: none; }
+.haze-sm::before { inset: -14px -90px -18px; } /* stays inside the footer padding so it never adds scroll */
 
-/* Home footer: frosted strip on every screen size */
-.glass-foot { background: rgba(255, 255, 255, 0.6); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border-color: rgba(10, 10, 10, 0.06); }
+/* Home: the single centered link */
+.view-link { display: inline-block; font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(44px, 3.6vw + 26px, 76px); font-weight: 500; line-height: 1.1; color: #0a0a0a; text-decoration-thickness: 1px; text-underline-offset: 12px; }
+.view-link:hover { font-style: italic; text-decoration-line: underline; }
+.view-link:focus-visible { outline: 1px solid #0a0a0a; outline-offset: 10px; }
 
 /* Frosted header/footer bars on small screens; clear on wide screens */
 .glass-bar { background: rgba(255, 255, 255, 0.45); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); border-color: rgba(255, 255, 255, 0.6); }
@@ -51,7 +49,6 @@ body::before { content: ""; position: fixed; top: 0; bottom: 0; left: 0; z-index
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .glass-bar { background: rgba(255, 255, 255, 0.85); }
-  .glass-foot { background: rgba(255, 255, 255, 0.9); }
 }
 
 @media (prefers-reduced-motion: reduce) {
