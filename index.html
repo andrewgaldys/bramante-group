@@ -16,7 +16,7 @@
   <script>
     tailwind.config = { future: { hoverOnlyWhenSupported: true }, theme: { extend: { fontFamily: { serif: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] }, colors: { ink: '#0a0a0a' } } } };
   </script>
-  <link rel="stylesheet" href="assets/site.css?v=9" />
+  <link rel="stylesheet" href="assets/site.css?v=10" />
 </head>
 
 <body class="relative isolate flex min-h-svh flex-col bg-white font-sans text-ink">
@@ -24,15 +24,14 @@
   <!-- Live "data terrain" background, drawn by assets/data-field.js -->
   <canvas id="data-field" class="fixed inset-0 -z-10 h-full w-full" aria-hidden="true"></canvas>
 
-  <main class="flex flex-1 items-center justify-center overflow-x-clip px-4 py-10 pr-7">
-    <!-- pr-7 vs px-4 offsets the 12px left rail so the logo sits on the true center of the screen -->
+  <main class="flex flex-1 items-center justify-center overflow-x-clip px-4 py-10">
     <h1 class="logo logo-xl haze">
       <span class="logo-main">BRAMANTE</span>
       <span class="logo-sub">GROUP</span>
     </h1>
   </main>
 
-  <footer class="safe-bottom overflow-x-clip px-4 pr-7 pt-1 text-center">
+  <footer class="safe-bottom overflow-x-clip px-4 pt-1 text-center">
     <div class="haze haze-sm inline-block">
       <nav aria-label="Primary">
         <!-- Padded links give a comfortable tap target on phones -->
