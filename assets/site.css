@@ -33,9 +33,27 @@ body { padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-are
 .btn-line { border-color: #d4d4d4; color: #0a0a0a; }
 .btn:active { opacity: 0.7; }
 
+/* Home: gallery frame around the viewport.
+   Inset from the screen edge (16 / 32 / 48px), then a stepped profile: heavy black band,
+   white relief channel, black hairline fillet. Square corners throughout. */
+.frame-wrap { --pad: 16px; padding: var(--pad); padding-bottom: max(var(--pad), env(safe-area-inset-bottom, 0px)); }
+.frame { --band: 8px; position: relative; border: var(--band) solid #0a0a0a; box-shadow: inset 0 0 0 4px #fff, inset 0 0 0 5.5px #0a0a0a; }
+@media (min-width: 640px) { .frame-wrap { --pad: 32px; } .frame { --band: 10px; } }
+@media (min-width: 768px) { .frame-wrap { --pad: 48px; } .frame { --band: 12px; } }
+@media (max-height: 520px) { .frame-wrap { --pad: 12px; } .frame { --band: 8px; } } /* short screens, e.g. phones held sideways */
+/* Miter joints: a fine diagonal seam across each corner of the band, like joined moulding */
+.frame::before {
+  content: ""; position: absolute; inset: calc(var(--band) * -1); pointer-events: none;
+  background:
+    linear-gradient(to top right, transparent calc(50% - 0.6px), rgba(255, 255, 255, 0.24) 50%, transparent calc(50% + 0.6px)) top left / var(--band) var(--band) no-repeat,
+    linear-gradient(to bottom right, transparent calc(50% - 0.6px), rgba(255, 255, 255, 0.24) 50%, transparent calc(50% + 0.6px)) top right / var(--band) var(--band) no-repeat,
+    linear-gradient(to bottom right, transparent calc(50% - 0.6px), rgba(255, 255, 255, 0.24) 50%, transparent calc(50% + 0.6px)) bottom left / var(--band) var(--band) no-repeat,
+    linear-gradient(to top right, transparent calc(50% - 0.6px), rgba(255, 255, 255, 0.24) 50%, transparent calc(50% + 0.6px)) bottom right / var(--band) var(--band) no-repeat;
+}
+
 /* Home: the full logo lockup, centered. Everything scales from --logo (the CIPRESSO size),
    so the crest, wordmark, and spacing keep the same proportions on every screen. */
-.logo-xl { --logo: clamp(40px, min(11vw, 15vh), 104px); } /* stays modest on short landscape screens */
+.logo-xl { --logo: clamp(34px, min(10vw, 15vh), 104px); } /* fits inside the frame on small phones; modest on short landscape screens */
 .logo-xl .crest { display: block; width: auto; height: calc(var(--logo) * 1.15); margin-bottom: calc(var(--logo) * 0.3); }
 .logo-xl .logo-main { font-size: var(--logo); }
 .logo-xl .logo-sub { font-size: calc(var(--logo) * 0.472); margin-top: calc(var(--logo) * 0.22); }

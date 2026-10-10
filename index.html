@@ -17,33 +17,38 @@
   <script>
     tailwind.config = { future: { hoverOnlyWhenSupported: true }, theme: { extend: { fontFamily: { serif: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] }, colors: { ink: '#0a0a0a' } } } };
   </script>
-  <link rel="stylesheet" href="assets/site.css?v=13" />
+  <link rel="stylesheet" href="assets/site.css?v=14" />
 </head>
 
-<body class="flex min-h-svh flex-col bg-white font-sans text-ink">
+<body class="bg-white font-sans text-ink">
 
-  <main class="flex flex-1 items-center justify-center px-4 py-10">
-    <!-- Logo lockup: cypress crest directly above the wordmark, all sized from --logo -->
-    <h1 class="logo logo-xl">
-      <img src="assets/cipresso-tree.png" alt="" class="crest" width="118" height="574" />
-      <span class="logo-main">CIPRESSO</span>
-      <span class="logo-sub">GROUP</span>
-    </h1>
-  </main>
+  <!-- Gallery frame around the viewport: inset from the edges, stepped black/white/black profile -->
+  <div class="frame-wrap flex min-h-svh">
+    <div class="frame flex flex-1 flex-col">
 
-  <footer class="safe-bottom px-4 pt-1 text-center">
-    <div>
-      <nav aria-label="Primary">
-        <!-- Padded links give a comfortable tap target on phones -->
-        <ul class="label flex justify-center gap-1 text-[11px] tracking-[0.16em] sm:gap-6 sm:text-[12px] sm:tracking-[0.18em]">
-          <li><a href="about.html" class="nav-link inline-block px-2.5 py-4 text-neutral-800 sm:px-3">About</a></li>
-          <li><a href="research.html" class="nav-link inline-block px-2.5 py-4 text-neutral-800 sm:px-3">Research</a></li>
-          <li><a href="contact.html" class="nav-link inline-block px-2.5 py-4 text-neutral-800 sm:px-3">Contact</a></li>
-        </ul>
-      </nav>
-      <p class="text-[11px] text-neutral-600 sm:text-[12px]">&copy; <span id="year">2026</span> Cipresso Group, LLC<span class="max-[360px]:hidden"> &nbsp;·&nbsp; </span><span class="max-[360px]:block">Research purposes only.</span></p>
+      <main class="flex flex-1 items-center justify-center px-4 py-[min(2.5rem,5svh)]">
+        <!-- Logo lockup: cypress crest directly above the wordmark, all sized from --logo -->
+        <h1 class="logo logo-xl">
+          <img src="assets/cipresso-tree.png" alt="" class="crest" width="118" height="574" />
+          <span class="logo-main">CIPRESSO</span>
+          <span class="logo-sub">GROUP</span>
+        </h1>
+      </main>
+
+      <footer class="px-2 pb-5 pt-1 text-center sm:px-4">
+        <nav aria-label="Primary">
+          <!-- Padded links give a comfortable tap target on phones -->
+          <ul class="label flex justify-center text-[11px] tracking-[0.16em] sm:gap-6 sm:text-[12px] sm:tracking-[0.18em]">
+            <li><a href="about.html" class="nav-link inline-block px-2 py-4 text-neutral-800 sm:px-3">About</a></li>
+            <li><a href="research.html" class="nav-link inline-block px-2 py-4 text-neutral-800 sm:px-3">Research</a></li>
+            <li><a href="contact.html" class="nav-link inline-block px-2 py-4 text-neutral-800 sm:px-3">Contact</a></li>
+          </ul>
+        </nav>
+        <p class="text-[11px] text-neutral-600 sm:text-[12px]">&copy; <span id="year">2026</span> Cipresso Group, LLC<span class="max-[360px]:hidden"> &nbsp;·&nbsp; </span><span class="max-[360px]:block">Research purposes only.</span></p>
+      </footer>
+
     </div>
-  </footer>
+  </div>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>

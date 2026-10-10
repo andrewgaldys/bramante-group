@@ -14,6 +14,6 @@ Website for **Cipresso Group, LLC**: commercial real estate data and research.
 
 ## Updating content
 
-- **Home page:** plain white, with the logo lockup (cypress crest `assets/cipresso-tree.png` above the CIPRESSO / GROUP wordmark) centered on screen, and About / Research / Contact in the footer.
+- **Home page:** plain white inside a stepped black gallery frame (`.frame` in `assets/site.css`), with the logo lockup (cypress crest `assets/cipresso-tree.png` above the CIPRESSO / GROUP wordmark) centered on screen, and About / Research / Contact in the footer.
 - **Reports:** add PDFs to a `reports/` folder and point each report's button at its file.
 - **Contact:** add your inbox after `mailto:` in the links on `contact.html`.
