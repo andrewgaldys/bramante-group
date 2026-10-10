@@ -10,7 +10,7 @@ Website for **Cipresso Group, LLC**: commercial real estate data and research.
 | Contact | `contact.html` |
 
 - Tailwind CSS via CDN and Google Fonts (Cormorant Garamond + Inter); shared styles in `assets/site.css`
-- Hosted on GitHub Pages from the `main` branch (no build step)
+- Hosted on GitHub Pages from the `main` branch (no build step) at **https://cipressogroup.com** (custom domain set by the `CNAME` file; DNS at GoDaddy)
 
 ## Updating content
 
