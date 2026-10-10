@@ -17,13 +17,10 @@
   <script>
     tailwind.config = { future: { hoverOnlyWhenSupported: true }, theme: { extend: { fontFamily: { serif: ['"Cormorant Garamond"', 'Georgia', 'serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] }, colors: { ink: '#0a0a0a' } } } };
   </script>
-  <link rel="stylesheet" href="assets/site.css?v=11" />
+  <link rel="stylesheet" href="assets/site.css?v=12" />
 </head>
 
-<body class="relative isolate flex min-h-svh flex-col bg-white font-sans text-ink">
-
-  <!-- Live "data terrain" background, drawn by assets/data-field.js -->
-  <canvas id="data-field" class="fixed inset-0 -z-10 h-full w-full" aria-hidden="true"></canvas>
+<body class="flex min-h-svh flex-col bg-white font-sans text-ink">
 
   <header class="flex justify-center px-4 pt-6 sm:pt-8">
     <a href="index.html" class="tree-mark" aria-label="Cipresso Group — Home">
@@ -31,15 +28,15 @@
     </a>
   </header>
 
-  <main class="flex flex-1 items-center justify-center overflow-x-clip px-4 py-10">
-    <h1 class="logo logo-xl haze">
+  <main class="flex flex-1 items-center justify-center px-4 py-10">
+    <h1 class="logo logo-xl">
       <span class="logo-main">CIPRESSO</span>
       <span class="logo-sub">GROUP</span>
     </h1>
   </main>
 
-  <footer class="safe-bottom overflow-x-clip px-4 pt-1 text-center">
-    <div class="haze haze-sm inline-block">
+  <footer class="safe-bottom px-4 pt-1 text-center">
+    <div>
       <nav aria-label="Primary">
         <!-- Padded links give a comfortable tap target on phones -->
         <ul class="label flex justify-center gap-1 text-[11px] tracking-[0.16em] sm:gap-6 sm:text-[12px] sm:tracking-[0.18em]">
@@ -53,6 +50,5 @@
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <script src="assets/data-field.js?v=9"></script>
 </body>
 </html>

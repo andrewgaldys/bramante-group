@@ -33,11 +33,6 @@ body { padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-are
 .btn-line { border-color: #d4d4d4; color: #0a0a0a; }
 .btn:active { opacity: 0.7; }
 
-/* Soft white haze behind text that sits on the animated field */
-.haze { position: relative; }
-.haze::before { content: ""; position: absolute; inset: -90px -160px; z-index: -1; background: radial-gradient(closest-side, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.6) 55%, transparent); pointer-events: none; }
-.haze-sm::before { inset: -14px -90px -18px; } /* stays inside the footer padding so it never adds scroll */
-
 /* Home: cypress mark centered at the top; scales down on short (landscape) screens */
 .tree-mark { display: block; transition: opacity 0.2s; }
 .tree-mark img { display: block; width: auto; height: clamp(52px, 10svh, 96px); }
