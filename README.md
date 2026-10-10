@@ -14,6 +14,6 @@ Website for **Cipresso Group, LLC**: commercial real estate data and research.
 
 ## Updating content
 
-- **Home page:** animated data surface drawn by `assets/data-field.js`, the logo centered on screen, and About / Research / Contact in the footer.
+- **Home page:** animated data surface drawn by `assets/data-field.js`, the cypress mark (`assets/cipresso-tree.png`) centered at the top, the wordmark centered on screen, and About / Research / Contact in the footer.
 - **Reports:** add PDFs to a `reports/` folder and point each report's button at its file.
 - **Contact:** add your inbox after `mailto:` in the links on `contact.html`.
