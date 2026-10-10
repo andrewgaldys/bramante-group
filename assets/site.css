@@ -33,13 +33,10 @@ body { padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-are
 .btn-line { border-color: #d4d4d4; color: #0a0a0a; }
 .btn:active { opacity: 0.7; }
 
-/* Home: cypress mark centered at the top; scales down on short (landscape) screens */
-.tree-mark { display: block; transition: opacity 0.2s; }
-.tree-mark img { display: block; width: auto; height: clamp(52px, 10svh, 96px); }
-.tree-mark:active { opacity: 0.6; }
-
-/* Home: the logo, large and centered (same proportions as the header logo) */
-.logo-xl { --logo: clamp(40px, min(11vw, 18vh), 104px); } /* scales with width, but stays modest on short landscape screens */
+/* Home: the full logo lockup, centered. Everything scales from --logo (the CIPRESSO size),
+   so the crest, wordmark, and spacing keep the same proportions on every screen. */
+.logo-xl { --logo: clamp(40px, min(11vw, 15vh), 104px); } /* stays modest on short landscape screens */
+.logo-xl .crest { display: block; width: auto; height: calc(var(--logo) * 1.15); margin-bottom: calc(var(--logo) * 0.3); }
 .logo-xl .logo-main { font-size: var(--logo); }
 .logo-xl .logo-sub { font-size: calc(var(--logo) * 0.472); margin-top: calc(var(--logo) * 0.22); }
 
